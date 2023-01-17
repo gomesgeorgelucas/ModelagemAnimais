@@ -1,58 +1,64 @@
 ﻿abstract class Animal
 {
-    public string? Nome { get; set; }
+    public string? Nome { get; init; }
 
-    public DateTime DataNascimento { get; set; }
+    public DateTime DataNascimento { get; init; }
 
-    public char Sexo { get; set; }
+    public char Sexo { get; init; }
 
-    public bool Carnívoro { get; set; }
+    public bool Carnívoro { get; init; }
 
-    public bool Peçonhento { get; set; }
+    public bool Peçonhento { get; init; }
 
     public int Idade()
     {
-        return DateTime.Today.Year - this.DataNascimento.Year;
+        return DateTime.Today.Year - DataNascimento.Year;
     }
 
     public abstract void Movimentar();
 
     public abstract void Comunicar();
 
-    public abstract void Alimentar();
+    public void Alimentar()
+    {
+        Console.WriteLine($"{Nome} se alimentou (Varia por animal e espécie).");
+    }
 }
 
 abstract class Mamífero : Animal
 {
-    public int QtdeMamas { get; set; }
-    public bool Pelos { get; set; }
-    public string? CorDoCabelo { get; set; }
-    public abstract void Amamentar();
+    public int QtdeMamas { get; init; }
+    public bool Pelos { get; init; }
+    public string? CorDoCabelo { get; init; }
+    public void Amamentar()
+    {
+        Console.WriteLine($"{Nome} amamentou.");
+    }
 }
 
 abstract class Ave : Animal
 {
-    public bool Rapina { get; set; }
+    public bool Rapina { get; init; }
 
-    public bool CorPena { get; set; }
+    public bool CorPena { get; init; }
 
     public void Ciscar()
     {
-        Console.WriteLine($"{this.Nome} ciscou...");
+        Console.WriteLine($"{Nome} ciscou...");
     }
 }
 
 abstract class Reptil : Animal
 {
-    public bool TemEscamas { get; set; }
-    public bool TemCasco { get; set; }
+    public bool TemEscamas { get; init; }
+    public bool TemCasco { get; init; }
 }
 
 interface IAquatico
 {
-    bool ViveEmTerra { get; set; }
-    bool Mergulho { get; set; }
-    bool AguaDoce { get; set; }
+    bool ViveEmTerra { get; init; }
+    bool Mergulho { get; init; }
+    bool AguaDoce { get; init; }
 }
 
 interface IOviparo
@@ -64,331 +70,280 @@ interface IOviparo
 interface IVoar
 {
     void Voar();
-    int AltitudeMaximaEmMetros { get; set; }
-    double VelocidadeDoVoo { get; set; }
+    int AltitudeMaximaEmMetros { get; init; }
+    double VelocidadeDoVoo { get; init; }
 }
 
 class Leão : Mamífero
 {
-    public override void Alimentar()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Amamentar()
-    {
-        throw new NotImplementedException();
-    }
-
     public override void Comunicar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} rugiu.");
     }
 
     public override void Movimentar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} se movimentou sobre quatro patas.");
     }
 }
 
 class Chacal : Mamífero
 {
-    public override void Alimentar()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Amamentar()
-    {
-        throw new NotImplementedException();
-    }
 
     public override void Comunicar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} latiu.");
     }
 
     public override void Movimentar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} se movimentou sobre quatro patas.");
     }
 }
 
 class Morcego : Mamífero, IVoar
 {
-    public int AltitudeMaximaEmMetros { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public double VelocidadeDoVoo { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public override void Alimentar()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Amamentar()
-    {
-        throw new NotImplementedException();
-    }
+    public int AltitudeMaximaEmMetros { get; init; }
+    public double VelocidadeDoVoo { get; init; }
 
     public override void Comunicar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} usou sonar.");
     }
 
     public override void Movimentar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} se moveu com ajuda das asas.");
     }
 
     public void Voar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} voou.");
     }
 }
 
 class Cisne : Ave, IAquatico, IVoar, IOviparo
 {
-    public bool ViveEmTerra { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public bool Mergulho { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public bool AguaDoce { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public int AltitudeMaximaEmMetros { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public double VelocidadeDoVoo { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public override void Alimentar()
-    {
-        throw new NotImplementedException();
-    }
+    public bool ViveEmTerra { get; init; }
+    public bool Mergulho { get; init; }
+    public bool AguaDoce { get; init; }
+    public int AltitudeMaximaEmMetros { get; init; }
+    public double VelocidadeDoVoo { get; init; }
 
     public void Botar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} botou ovo.");
     }
 
     public void Chocar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} chocou ovo.");
     }
 
     public override void Comunicar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} arensou.");
     }
 
     public override void Movimentar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} caminhou usando as duas patas.");
     }
 
     public void Voar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} voou.");
     }
 }
 
 class Arara : Ave, IVoar, IOviparo
 {
-    public int AltitudeMaximaEmMetros { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public double VelocidadeDoVoo { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public override void Alimentar()
-    {
-        throw new NotImplementedException();
-    }
+    public int AltitudeMaximaEmMetros { get; init; }
+    public double VelocidadeDoVoo { get; init; }
 
     public void Botar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} botou ovo.");
     }
 
     public void Chocar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} chocou ovo.");
     }
 
     public override void Comunicar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} cantou.");
     }
     public override void Movimentar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} andou usando pés.");
     }
 
     public void Voar()
     {
-        throw new NotImplementedException();
+
+        Console.WriteLine($"{Nome} voou.");
     }
 }
 
 class DragãoDeComodo : Reptil, IOviparo
 {
-    public override void Alimentar()
-    {
-        throw new NotImplementedException();
-    }
-
     public void Botar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} botou ovo.");
     }
 
     public void Chocar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} chocou ovo.");
     }
 
     public override void Comunicar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} silvou.");
     }
 
     public override void Movimentar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} camihou sobre quatro patas.");
     }
 }
 
 class Lontra : Mamífero, IAquatico
 {
-    public bool ViveEmTerra { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public bool Mergulho { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public bool AguaDoce { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public override void Alimentar()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Amamentar()
-    {
-        throw new NotImplementedException();
-    }
+    public bool ViveEmTerra { get; init; }
+    public bool Mergulho { get; init; }
+    public bool AguaDoce { get; init; }
 
     public override void Comunicar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} chilrou.");
     }
 
     public override void Movimentar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} caminhou sobre quatro patas.");
     }
 }
 
 class Pinguim : Ave, IOviparo
 {
-    public override void Alimentar()
-    {
-        throw new NotImplementedException();
-    }
-
     public void Botar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} botou ovo.");
     }
 
     public void Chocar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} chocou ovo.");
     }
 
     public override void Comunicar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} buzinou.");
     }
 
     public override void Movimentar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} se movimentou usando os dois pés.");
     }
 }
 
 class Coruja : Ave, IVoar, IOviparo
 {
-    public int AltitudeMaximaEmMetros { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public double VelocidadeDoVoo { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public override void Alimentar()
-    {
-        throw new NotImplementedException();
-    }
+    public int AltitudeMaximaEmMetros { get; init; }
+    public double VelocidadeDoVoo { get; init; }
 
     public void Botar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} botou ovo.");
     }
 
     public void Chocar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} chocou ovo.");
     }
 
     public override void Comunicar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} corujou.");
     }
 
     public override void Movimentar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} caminhou usando os dois pés.");
     }
 
     public void Voar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} voou.");
     }
 }
 
 class Elefante : Mamífero
 {
-    public override void Alimentar()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Amamentar()
-    {
-        throw new NotImplementedException();
-    }
-
     public override void Comunicar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} trumpeteou.");
     }
 
     public override void Movimentar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} andou sobre quatro patas.");
     }
 }
 
 class Jacaré : Reptil, IOviparo, IAquatico
 {
-    public bool ViveEmTerra { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public bool Mergulho { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public bool AguaDoce { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public override void Alimentar()
-    {
-        throw new NotImplementedException();
-    }
+    public bool ViveEmTerra { get; init; }
+    public bool Mergulho { get; init; }
+    public bool AguaDoce { get; init; }
 
     public void Botar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} botou ovo.");
     }
 
     public void Chocar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} chocou ovo.");
     }
 
     public override void Comunicar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} silvou.");
     }
 
     public override void Movimentar()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{Nome} caminhou sobre quatro patas.");
+    }
+}
+
+class Ornitorrinco : Mamífero, IAquatico, IOviparo
+{
+    public bool ViveEmTerra { get; init; }
+    public bool Mergulho { get; init; }
+    public bool AguaDoce { get; init; }
+
+    public void Botar()
+    {
+        Console.WriteLine($"{Nome} botou ovo.");
+    }
+
+    public void Chocar()
+    {
+        Console.WriteLine($"{Nome} chocou ovo.");
+    }
+
+    public override void Comunicar()
+    {
+        Console.WriteLine($"{Nome} cantou.");
+    }
+
+    public override void Movimentar()
+    {
+        Console.WriteLine($"{Nome} caminhou sobre quatro patas");
     }
 }
